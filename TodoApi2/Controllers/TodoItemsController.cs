@@ -114,7 +114,7 @@ public class TodoItemsController : ControllerBase
 
     private bool TodoItemExists(long id)
     {
-        return _context.TodoItems.Any(e => e.Id == id);
+        return _context.TodoItems.Any(e => e.Id == id);//checks if there is a TodoItem object in the TodoItems collection inmemory database
     }
 
     private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>
