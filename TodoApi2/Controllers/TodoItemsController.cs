@@ -16,12 +16,13 @@ public class TodoItemsController : ControllerBase
     }
 
     // GET: api/TodoItems
+    //using Task indicates it is an asynchronous operation, it allows the action method to execute asynchronously without blocking the main thread so adding it before ActionResult means that the method returns a task which will eventually produce an <ActionResult<IEnumerable<TodoItemDTO>>> result.
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()
+    public async Task<ActionResult<IEnumerable<TodoItemDTO>>> GetTodoItems()//ActionResult<Type of data returned> is a generic class that represents the result of an action method in an MVC or a Web API controller. IEnumberable<type> represents that it returns the sequence of items of the specified type.
     {
         return await _context.TodoItems
             .Select(x => ItemToDTO(x))//select is one of the LINQ extension methods that transform a sequence of elements(in this case the TodoItems in the inmemory db collection) to another form(in this case to TodoItemDTO elements)
-            .ToListAsync();//we are changing the todo items to todoDTO items because we only want to get the data transfer objects(subset of the properties of the model class, ommitting the nullable IsSecret property)
+            .ToListAsync();//we are changing the todo items to todoDTO items because we only want to get the data transfer objects(subset of the properties of the model class, ommitting the nullable("typeOfData?") IsSecret property)
     }
 
     // GET: api/TodoItems/5
@@ -46,7 +47,7 @@ public class TodoItemsController : ControllerBase
     [HttpPut("{id}")]
     public async Task<IActionResult> PutTodoItem(long id, TodoItemDTO todoDTO)
     {
-        if (id != todoDTO.Id)
+        if (id != todoDTO.Id)//if the route parameter ID is not the same as the updated object todoDTO's id then send a badrequest status error message.
         {
             return BadRequest();
         }
