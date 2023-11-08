@@ -24,7 +24,12 @@ public class TodoItemsController : ControllerBase
             .Select(x => ItemToDTO(x))//select is one of the LINQ extension methods that transform a sequence of elements(in this case the TodoItems in the inmemory db collection) to another form(in this case to TodoItemDTO elements)
             .ToListAsync();//we are changing the todo items to todoDTO items because we only want to get the data transfer objects(subset of the properties of the model class, ommitting the nullable("typeOfData?") IsSecret property)
     }
-
+    /*A very good example of using the select and where methods for filtering:
+     * 
+     List<int> numbers = new List<int> {1,2,3,4,5};
+     List<string> evenNumberStrings = numbers.Where(n=>n%2==0).Select(n=>n.ToString()).ToList();
+     
+     */
     // GET: api/TodoItems/5
     // <snippet_GetByID>
     [HttpGet("{id}")]
@@ -92,13 +97,13 @@ public class TodoItemsController : ControllerBase
         return CreatedAtAction(
             nameof(GetTodoItem),
             new { id = todoItem.Id },
-            ItemToDTO(todoItem));
+            ItemToDTO(todoItem));//the createdAtAction method combines these paramters to appropriately make/create an http 201 response.
     }
     // </snippet_Create>
 
     // DELETE: api/TodoItems/5
     [HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTodoItem(long id)
+    public async Task<IActionResult> DeleteTodoItem(long id)//Task indicates the method asynchronously returns a task which may resolve to a successful deletion operation.
     {
         var todoItem = await _context.TodoItems.FindAsync(id);
         if (todoItem == null)
@@ -114,7 +119,7 @@ public class TodoItemsController : ControllerBase
 
     private bool TodoItemExists(long id)
     {
-        return _context.TodoItems.Any(e => e.Id == id);//checks if there is a TodoItem object in the TodoItems collection inmemory database
+        return _context.TodoItems.Any(e => e.Id == id);//the Any() method checksand returns true if there is at least one TodoItem object in the TodoItems collection with the id parameter that was passed in else it returns false. If the collection is empty Any() returns false so we can use this behavior.
     }
 
     private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>
