@@ -4,7 +4,7 @@ using TodoApi2.Models;
 
 var builder = WebApplication.CreateBuilder(args);//the WebApplication.CreateBuilder() method is used for creating an instance of the webapplicationbuilder class responsible for making web applications.
 
-// Add services to the container.
+// Add services to the container.Container can be accessed from multiple points in the application, it's distributive.
 
 builder.Services.AddControllers();//adds mvc controllers to the container
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
