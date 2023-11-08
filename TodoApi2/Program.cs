@@ -15,7 +15,7 @@ builder.Services.AddSwaggerGen();//this adds the swagger generation services whi
 var app = builder.Build();//creating the web application instance using the build() method.
 
 // Configure the HTTP request pipeline with the middleware components...
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())//if the app is in its development stage I guess?
 {
     app.UseSwagger();//adds the swagger middleware to serve the swagger JSON documents.
     app.UseSwaggerUI();//adds the swagger UI middleware to serve the swagger UI.
