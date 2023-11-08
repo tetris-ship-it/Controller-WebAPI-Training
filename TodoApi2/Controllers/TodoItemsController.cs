@@ -121,7 +121,8 @@ public class TodoItemsController : ControllerBase
     {
         return _context.TodoItems.Any(e => e.Id == id);//the Any() method checksand returns true if there is at least one TodoItem object in the TodoItems collection with the id parameter that was passed in else it returns false. If the collection is empty Any() returns false so we can use this behavior.
     }
-
+    /*these methods: Select, Where, Any and the such take in lambda expressions as parameters
+     lambda expressions  are basically written in the form "x=>x.methodName()" or some other form like "x=some expression containing x"*/
     private static TodoItemDTO ItemToDTO(TodoItem todoItem) =>
        new TodoItemDTO
        {
