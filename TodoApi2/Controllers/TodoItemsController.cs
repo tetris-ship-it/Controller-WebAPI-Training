@@ -27,8 +27,11 @@ public class TodoItemsController : ControllerBase
     /*A very good example of using the select and where methods for filtering:
      * 
      List<int> numbers = new List<int> {1,2,3,4,5};
-     List<string> evenNumberStrings = numbers.Where(n=>n%2==0).Select(n=>n.ToString()).ToList();
-     
+     List<string> evenNumberStrings = numbers.Where(n=>n%2==0).Select(n=>n.ToString()).ToList(); 
+
+    **ToList() is used to convert an IEnumerable<T> sequence of elements into a List<T> set of elements and it is synchronous in its making because it pulls all elements into memory and fully populates the list.
+    **ToListAsync() is used to convert data to a List<T> asynchronously meaning it allows other operations to continue while it executes/while the data is being fetched. It is better suited for database queries, API calls, I/O based tasks because it utilizes the system resources good and it is responsive.
+
      */
     // GET: api/TodoItems/5
     // <snippet_GetByID>
